@@ -12,16 +12,12 @@
 
 time_start=`date +%s`
 
-#quartus version setting
-export QUARTUS="/usr/local/intelFPGA_lite/17.1/quartus/sopc_builder/bin"
-
-export QUARTUS_64BIT=1
 
 #show help
 show_help()
 {
     echo "usage : sh local_build.sh <opts>"
-    echo "       p     : only create quartus new project ** new param **" 
+    echo "       p     : only create quartus new project"
     echo "       x     : synthesize only (create new projet)"
     echo "       clean : clean up quartus generated files"
     echo "       rebuild or no arg : create new project and compile all"
@@ -55,10 +51,7 @@ if [ "$1" = "clean" ] ; then
     echo "**** clean up complete ********"
     echo
     exit 1
-
-    # compile --------------------------------------------------
 else
-
 
     if [ -d rev/ ] ; then
         if [ -d rev_bak/ ] ; then
@@ -66,20 +59,19 @@ else
         fi
         mv rev rev_bak
     fi
-    mkdir rev
+    
 
 
     #copy user_qsys_component, To qsys folder
     #cp -r ../hdl/qsys_lib/fx3_ctrl ../hdl/qsys/system_qsys
 
 
-    # generate qsys_file from "**.qsys"
-    #./gen_qsys_file.py "../hdl/altera_ip" 0
-    #./gen_qsys_file.py "../hdl/qsys" 1
-
-    #./mkprj.rb # generate prj_file.tcl
-
-
+    # generate qsys_file from "**.qsys"  1:Create Sim, 0:No Sim
+    if [ "$1" != "x" ] ; then
+    ./gen_qsys_file.py "../hdl/qsys" 1
+    fi
+    
+    mkdir rev
     cd rev
 
     ../mkprj.rb # generate prj_file.tcl

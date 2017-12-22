@@ -22,19 +22,16 @@ Dir::glob("../../hdl/source/**/*.vhd").each {|f|
 }
 
 #find QIP_FILE(*.qip)
-#Dir::glob("../hdl/altera_ip/**/*.qip").each {|f|
-#  file.puts "set_global_assignment -name QIP_FILE \"#{f}\""
-#}
-
-#select qsys file
-Dir::glob("../../hdl/altera_ip/**/*.qsys").each {|f|
-  file.puts "set_global_assignment -name QSYS_FILE \"#{f}\""
+Dir::glob("../../hdl/altera_ip/**/*.qip").each {|f|
+  file.puts "set_global_assignment -name QIP_FILE \"#{f}\""
 }
 
+
+
 #find QSYS QIP_FILE(*.qip)
-#Dir::glob("../hdl/qsys/**/*.qip").each {|f|
-#  file.puts "set_global_assignment -name QIP_FILE \"#{f}\""
-#}
+Dir::glob("../../hdl/qsys/**/*.qip").each {|f|
+  file.puts "set_global_assignment -name QIP_FILE \"#{f}\""
+}
 
 Dir::glob("../../hdl/qsys/**/*.qsys").each {|f|
   file.puts "set_global_assignment -name QSYS_FILE \"#{f}\""
@@ -42,9 +39,9 @@ Dir::glob("../../hdl/qsys/**/*.qsys").each {|f|
 
 
 #find SIP_FILE(*.sip)
-Dir::glob("../../hdl/altera_ip/**/*.sip").each {|f|
-  file.puts "set_global_assignment -name SIP_FILE \"#{f}\""
-}
+#Dir::glob("../../hdl/altera_ip/**/*.sip").each {|f|
+#  file.puts "set_global_assignment -name SIP_FILE \"#{f}\""
+#}
 
 file.close
 
